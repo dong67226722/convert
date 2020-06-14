@@ -1,4 +1,5 @@
 
+
 def read_file(filename):
 	lines = []
 	with open(filename, 'r', encoding='utf-8-sig') as f:
@@ -13,6 +14,8 @@ def convert(lines):
 	Viki_count = 0
 	At = 0
 	Vt = 0
+	aim = 0
+	vim = 0
 	for line in lines:
 		s = line.split(' ')
 		time = s[0]
@@ -20,19 +23,23 @@ def convert(lines):
 		if name == 'Allen':
 			if s[2] == '貼圖':
 				At += 1
+			elif s[2] == '圖片':
+				aim += 1
 			else:
 				for m in s[2:]:
 					Allen_count += len(m)
 		elif name == 'Viki':
 			if s[2] == '貼圖':
 				Vt += 1
+			elif s[2] == '圖片':
+				vim += 1
 			else:
 				for m in s[2:]:
 					Viki_count += len(m)
 
-	print('Allen说了', Allen_count, '个字','传了', At, '贴图')
-	print('Viki说了', Viki_count, '个字','传了', Vt, '贴图')
-		# print(s)	
+	print('Allen说了', Allen_count, '个字','传了', At, '贴图', aim, '图片')
+	print('Viki说了', Viki_count, '个字','传了', Vt, '贴图', vim, '图片' )
+	
 
 
 def write_file(filename, lines):
@@ -45,7 +52,5 @@ def main():
 
 	lines = read_file('LINE-Viki.txt')
 	lines = convert(lines)
-	# write_file('output.txt', lines)
-
-
+	
 main()
